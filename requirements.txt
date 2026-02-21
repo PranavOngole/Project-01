@@ -1,0 +1,26 @@
+# ════════════════════════════════════════════════════════════════════════════
+#  Project-01 | AI-Powered Stock Research Platform
+#  Python dependencies
+# ════════════════════════════════════════════════════════════════════════════
+
+# ── AI ───────────────────────────────────────────────────────────────────────
+anthropic>=0.39.0          # Claude API — all nine research agents
+
+# ── Frontend ─────────────────────────────────────────────────────────────────
+streamlit>=1.32.0          # Web UI — single-page app, no build step required
+plotly>=5.20.0             # Interactive price charts and indicator overlays
+
+# ── Database ─────────────────────────────────────────────────────────────────
+duckdb>=1.0.0              # Embedded analytical DB — price history, report cache
+
+# ── Market Data ──────────────────────────────────────────────────────────────
+yfinance>=0.2.40           # OHLCV, financials, metadata (15-20 min delayed)
+
+# ── Data Processing ───────────────────────────────────────────────────────────
+pandas>=2.2.0              # DataFrame manipulation for price and fundamentals data
+
+# ── Configuration ─────────────────────────────────────────────────────────────
+python-dotenv>=1.0.0       # Load .env file into os.environ
+
+# ── Reliability ──────────────────────────────────────────────────────────────
+tenacity>=8.2.0            # Retry logic for API calls (rate limits, timeouts)
