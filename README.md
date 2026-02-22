@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue)](https://python.org)
 [![Powered by Claude](https://img.shields.io/badge/AI-Claude%20API-orange)](https://anthropic.com)
-[![Part of DataForge365](https://img.shields.io/badge/Series-DataForge365-blueviolet)](https://github.com/PranavOngole/Project-00)
+[![Part of POV Series](https://img.shields.io/badge/Series-Pranav%20Ongole's%20Vision%20(POV)-blueviolet)](https://github.com/PranavOngole/Project-00)
 
 ---
 
@@ -173,14 +173,14 @@ ADRs, ETFs, SPACs, and preferred shares are excluded from the default universe.
 
 ---
 
-## Part of the DataForge365 Series
+## Part of Pranav Ongole's Vision (POV) Series
 
 This project is **Project-01** in a year-long, public build series.
 Each project ships a working product and documents the full decision log.
 
 | # | Project | Status |
 |---|---|---|
-| 00 | [DataForge365 — Series Kickoff & Manifesto](https://github.com/PranavOngole/Project-00) | Complete |
+| 00 | [POV Series — Kickoff & Manifesto](https://github.com/PranavOngole/Project-00) | Complete |
 | 01 | AI-Powered Stock Research Platform | **In Progress** |
 | 02–12 | Coming throughout 2026 | Planned |
 
