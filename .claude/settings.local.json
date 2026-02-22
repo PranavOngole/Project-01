@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 data/schema.py2)",
+      "Bash(python3 data/schema.py 2>&1)",
+      "Bash(git add CHANGELOG.md && git commit -m \"$\\(cat <<'EOF'\nAdd CHANGELOG.md with full version history from v0.0.1 to v0.3.3\n\nDocuments every commit with what changed, why, and system impact.\nCovers Phase 1 scaffold through Phase 3C base_agent rewrite.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git push origin main)"
+    ]
+  }
+}
