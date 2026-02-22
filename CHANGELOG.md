@@ -9,6 +9,55 @@ Format per entry:
 
 ---
 
+## [0.3.4] — 2026-02-22
+**Commit (public):** `c144876`
+**Commit (private):** `5547cc0`
+**Phase:** 3D — Deployment & Automation
+
+### Added (public repo — `Project-01`)
+
+- **`railway.toml`** — Railway deployment configuration
+  - Builder: `nixpacks` (auto-detects Python, installs `requirements.txt`)
+  - Start command: `streamlit run app/main.py --server.port $PORT --server.address 0.0.0.0 --server.headless true`
+  - `$PORT` injected at runtime by Railway — not hardcoded
+  - Restart policy: `on_failure`, max 3 retries before Railway alerts
+
+- **`runtime.txt`** — Pins Python 3.11 for nixpacks
+  - Without this, nixpacks may select a different Python version
+  - One line: `python-3.11`
+
+### Added (private repo — `Project-01-Private`)
+
+- **`n8n/stock_data_refresh.json`** — Import-ready n8n workflow
+  - **Two schedule triggers:** 9:15 AM ET + 4:30 PM ET, weekdays only
+  - **Timezone:** `America/New_York` — DST handled automatically, no manual UTC conversion needed
+  - **HTTP Request node:** GET ping to Railway app URL (stored in n8n variable `RAILWAY_APP_URL`)
+  - **Health check branch:** If node splits on HTTP 200 → Log Success, else → Log Failure
+  - Both triggers feed into the same HTTP Request node (single pipeline path)
+  - `active: false` by default — user activates manually after importing
+  - Phase 5 upgrade path noted: replace GET ping with POST to `/api/refresh` once that endpoint exists
+
+- **`docs/RAILWAY_SETUP.md`** — Step-by-step Railway + n8n setup guide
+  - Railway account creation and repo connection steps
+  - Complete env var table (Phase 3 skeleton vars + Phase 4 prompt vars)
+  - `DUCKDB_PATH` set to `/tmp/project01.duckdb` for Railway (ephemeral filesystem)
+  - n8n install (`brew install n8n`), workflow import, variable config, activation
+  - `brew services start n8n` for auto-start on Mac boot
+  - GitHub Projects `gh` CLI commands for Sprint 1 board creation (all 13 Phase 3-4 tasks)
+  - Cost projection table: ~$65–80/month total within $100 ceiling
+
+### Pending (manual steps — requires your action)
+
+| Step | Where | What to do |
+|---|---|---|
+| Railway account | [railway.app](https://railway.app) | Sign up with GitHub, connect `Project-01` repo |
+| Railway env vars | Railway dashboard → Variables | Copy values from `RAILWAY_SETUP.md` |
+| n8n install | Terminal | `brew install n8n` then `n8n start` |
+| n8n workflow | `localhost:5678` | Import `n8n/stock_data_refresh.json`, set `RAILWAY_APP_URL`, toggle Active |
+| GitHub Projects | Terminal | `gh auth login` then run commands from `RAILWAY_SETUP.md` Step 6 |
+
+---
+
 ## [0.3.3] — 2026-02-21
 **Commit:** `481a94b`
 **Phase:** 3C — Agent Base Class
