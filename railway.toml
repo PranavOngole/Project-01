@@ -1,0 +1,20 @@
+# ════════════════════════════════════════════════════════════════════════════
+#  Project-01 | Railway Deployment Configuration
+#
+#  Railway uses Nixpacks to auto-detect Python, install requirements.txt,
+#  and launch the start command. PORT is injected automatically by Railway
+#  into the environment — do NOT hardcode it.
+#
+#  Deploy steps:
+#    1. Connect this repo to a Railway project
+#    2. Add all env vars from .env.example in the Railway dashboard
+#    3. Railway auto-deploys on every push to main
+# ════════════════════════════════════════════════════════════════════════════
+
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "streamlit run app/main.py --server.port $PORT --server.address 0.0.0.0 --server.headless true"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
