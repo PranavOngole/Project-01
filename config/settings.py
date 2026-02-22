@@ -17,7 +17,7 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 
 # ── AI Provider ───────────────────────────────────────────────────────────────
 
-ANTHROPIC_API_KEY: str = os.environ["ANTHROPIC_API_KEY"]
+ANTHROPIC_API_KEY: str = os.getenv("ANTHROPIC_API_KEY", "")  # Required for Phase 4 agents; optional for Phase 3
 
 # Sprint 2 optional: OpenAI for Finance Researcher / Technical Analyst
 OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
