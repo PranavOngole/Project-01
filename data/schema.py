@@ -481,7 +481,7 @@ SELECT
     SUM(CASE WHEN agent_name = 'technical_analyst'    THEN total_cost_usd ELSE 0 END) AS technical_cost,
     SUM(CASE WHEN agent_name = 'finance_researcher'   THEN total_cost_usd ELSE 0 END) AS researcher_cost,
     SUM(CASE WHEN agent_name = 'business_analyst'     THEN total_cost_usd ELSE 0 END) AS ba_cost,
-    SUM(CASE WHEN agent_name = 'project_manager'      THEN total_cost_usd ELSE 0 END) AS pm_cost,
+    SUM(CASE WHEN agent_name = 'project_coordinator'  THEN total_cost_usd ELSE 0 END) AS pc_cost,
     AVG(total_cost_usd)                                     AS avg_cost_per_call,
     AVG(latency_ms)                                         AS avg_latency_ms
 FROM api_usage

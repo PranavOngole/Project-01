@@ -33,7 +33,7 @@ FINANCE_RESEARCHER_MODEL: str = os.getenv("FINANCE_RESEARCHER_MODEL", "claude-so
 TECHNICAL_ANALYST_MODEL: str = os.getenv("TECHNICAL_ANALYST_MODEL", "claude-sonnet-4-6")
 FUNDAMENTAL_ANALYST_MODEL: str = os.getenv("FUNDAMENTAL_ANALYST_MODEL", "claude-opus-4-6")
 QA_TESTER_MODEL: str = os.getenv("QA_TESTER_MODEL", "claude-haiku-4-5-20251001")
-PROJECT_MANAGER_MODEL: str = os.getenv("PROJECT_MANAGER_MODEL", "claude-haiku-4-5-20251001")
+PROJECT_COORDINATOR_MODEL: str = os.getenv("PROJECT_COORDINATOR_MODEL", "claude-haiku-4-5-20251001")
 AI_ANALYST_MODEL: str = os.getenv("AI_ANALYST_MODEL", "claude-sonnet-4-6")
 
 

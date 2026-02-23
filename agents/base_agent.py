@@ -112,7 +112,7 @@ _AGENT_ROLES: dict[str, str] = {
     "finance_researcher":   "analyst",
     "technical_analyst":    "analyst",
     "qa_tester":            "validator",
-    "project_manager":      "tracker",
+    "project_coordinator":  "tracker",
     "data_engineer":        "data_pull",
     "ai_analyst":           "monitor",
 }
