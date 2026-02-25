@@ -24,3 +24,4 @@ python-dotenv>=1.0.0       # Load .env file into os.environ
 
 # ── Reliability ──────────────────────────────────────────────────────────────
 tenacity>=8.2.0            # Retry logic for API calls (rate limits, timeouts)
+requests>=2.31.0           # HTTP client for webhook calls and external APIs

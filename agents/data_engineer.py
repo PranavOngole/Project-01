@@ -21,6 +21,7 @@ class DataEngineerAgent(BaseAgent):
         super().__init__(
             agent_name="data_engineer",
             model=settings.DATA_ENGINEER_MODEL,
+            agent_id="DE-01",
         )
 
     def run(self, ticker: str, context: dict[str, Any]) -> dict[str, Any]:

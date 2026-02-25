@@ -155,15 +155,18 @@ class BaseAgent(ABC):
     retry logic, and DB logging are all handled here.
     """
 
-    def __init__(self, agent_name: str, model: str | None = None) -> None:
+    def __init__(self, agent_name: str, model: str | None = None, agent_id: str | None = None) -> None:
         """
         Args:
             agent_name: Snake_case name matching agent_logs.agent_name
                         (e.g. 'fundamental_analyst', 'manager').
             model:      Anthropic model ID. Defaults to MANAGER_MODEL from settings.
                         Each concrete agent should pass its own model from settings.
+            agent_id:   Registry ID (e.g. 'MGR-01', 'FA-01'). Used as the PK
+                        in agent_logs and linked in api_usage rows.
         """
         self.agent_name = agent_name
+        self.agent_id = agent_id
         self.model = model or settings.MANAGER_MODEL
         self.agent_role = _AGENT_ROLES.get(agent_name, "analyst")
         self._client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
@@ -416,7 +419,7 @@ class BaseAgent(ABC):
                 """
                 INSERT INTO api_usage (
                     run_id, ticker, triggered_by,
-                    agent_name, agent_role,
+                    agent_name, agent_id, agent_role,
                     api_provider, api_endpoint, model, model_tier,
                     input_tokens, input_cached_tokens, input_uncached_tokens,
                     output_tokens, thinking_tokens, response_tokens, total_tokens,
@@ -427,7 +430,7 @@ class BaseAgent(ABC):
                     created_date, created_at
                 ) VALUES (
                     ?, ?, ?,
-                    ?, ?,
+                    ?, ?, ?,
                     ?, ?, ?, ?,
                     ?, ?, ?,
                     ?, ?, ?, ?,
@@ -440,7 +443,7 @@ class BaseAgent(ABC):
                 """,
                 [
                     run_id, ticker, triggered_by,
-                    self.agent_name, self.agent_role,
+                    self.agent_name, self.agent_id, self.agent_role,
                     "anthropic", "/v1/messages", self.model, _model_tier(self.model),
                     input_tokens, input_cached_tokens, input_uncached_tokens,
                     output_tokens, thinking_tokens, response_tokens, total_tokens,
@@ -516,14 +519,14 @@ class BaseAgent(ABC):
             conn.execute(
                 """
                 INSERT INTO agent_logs (
-                    log_date, agent_name,
+                    log_date, agent_id, agent_name,
                     what_i_did, wins, losses, struggles, blockers,
                     analyses_completed, api_calls_made,
                     total_tokens_used, total_cost_usd,
                     errors_encountered, avg_latency_ms,
                     created_date, created_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT (log_date, agent_name) DO UPDATE SET
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT (log_date, agent_id) DO UPDATE SET
                     what_i_did         = excluded.what_i_did,
                     wins               = excluded.wins,
                     losses             = excluded.losses,
@@ -538,7 +541,7 @@ class BaseAgent(ABC):
                     updated_at         = excluded.updated_at
                 """,
                 [
-                    today, self.agent_name,
+                    today, self.agent_id or self.agent_name, self.agent_name,
                     what_i_did, wins, losses, struggles, blockers,
                     analyses_completed, api_calls_made,
                     total_tokens_used, total_cost_usd,

@@ -29,6 +29,7 @@ class ManagerAgent(BaseAgent):
         super().__init__(
             agent_name="manager",
             model=settings.MANAGER_MODEL,
+            agent_id="MGR-01",
         )
 
     def run(self, ticker: str, context: dict[str, Any]) -> dict[str, Any]:

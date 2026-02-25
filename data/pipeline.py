@@ -397,17 +397,17 @@ def _log_data_pull(
             """
             INSERT INTO api_usage (
                 ticker, triggered_by,
-                agent_name, agent_role,
+                agent_name, agent_id, agent_role,
                 api_provider, api_endpoint, model, model_tier,
                 request_started_at, request_completed_at, latency_ms,
                 is_error, error_message,
                 environment,
                 created_date, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             [
                 ticker, triggered_by,
-                "data_engineer", "data_pull",
+                "data_engineer", "DE-01", "data_pull",
                 "yfinance", "yfinance.history", "yfinance", "free",
                 started_at, completed_at, latency_ms,
                 is_error, error_message,
